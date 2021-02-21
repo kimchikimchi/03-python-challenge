@@ -57,21 +57,17 @@ with open(os.path.join("Resources", "budget_data.csv")) as csvfile:
     # We are counting *between months*, not number of months.  Hence -1
     avg_pandl_change = cumulative_daily_pandl_change / (total_months - 1)
 
-    print("Financial Analysis")
-    print("----------------------------")
-    print(f"Total Months: {total_months}")
-    print(f"Total: ${total_pandl}")
-    print(f"Average Change: ${ round(avg_pandl_change, 2) } ")
-    print(f"Greatest Increase in Profits: {top_profit_month} (${top_profit})")
-    print(f"Greatest Decrease in Profits: {top_loss_month} (${top_loss})")
+    # Pull the output into a variable so that it can be reused.
+    output = ( "Financial Analysis\n" +
+               "----------------------------\n" +
+               f"Total Months: {total_months}\n" +
+               f"Total: ${total_pandl}\n" +
+               f"Average Change: ${ round(avg_pandl_change, 2) }\n" +
+               f"Greatest Increase in Profits: {top_profit_month} (${top_profit})\n" +
+               f"Greatest Decrease in Profits: {top_loss_month} (${top_loss})\n"
+            )
+    print(output)
 
     # Print the same info to a file
-
     with open(os.path.join("analysis", "analysis.txt"), 'w') as outfile:
-        outfile.write("Financial Analysis\n")
-        outfile.write("----------------------------\n")
-        outfile.write(f"Total Months: {total_months}\n")
-        outfile.write(f"Total: ${total_pandl}\n")
-        outfile.write(f"Average Change: ${ round(avg_pandl_change, 2) }\n")
-        outfile.write(f"Greatest Increase in Profits: {top_profit_month} (${top_profit})\n")
-        outfile.write(f"Greatest Decrease in Profits: {top_loss_month} (${top_loss})\n")
+        outfile.write(output)

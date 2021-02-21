@@ -34,32 +34,30 @@ with open(os.path.join("Resources", "election_data.csv")) as csvfile:
         else:
             result[candidate] = 1
 
+# Store output into a variable to recycle both for stdout and file output
 line_sep = '-------------------------'
-print("Election Results")
-print(f"{line_sep}")
-print(f"Total Votes: {total_votes}")
-print(f"{line_sep}")
+output = (  "Election Results\n" +
+            f"{line_sep}\n" +
+            f"Total Votes: {total_votes}\n"
+            f"{line_sep}\n"
+        )
 
 last_winning_votes = 0
 
 for candidate, votes in result.items():
     percent = votes / total_votes * 100
-    print(f"{candidate}: {round(percent, 2)}% ({votes})")
-
+    # Display up to 3 decimal points. Probably too OCD of me
+    output += f"{candidate}: " + "%.3f" % round(percent, 3) + f"% ({votes})\n"
     if votes > last_winning_votes:
         last_winning_votes = votes
         winner = candidate
 
-print(f"{line_sep}")
-print(f"Winner: {winner}")       
-print(f"{line_sep}")
+output += ( f"{line_sep}\n" +
+            f"Winner: {winner}\n" +
+            f"{line_sep}\n"
+        )
+print(output)
 
-# The total number of votes cast
-
-# A complete list of candidates who received votes
-
-# The percentage of votes each candidate won
-
-# The total number of votes each candidate won
-
-# The winner of the election based on popular vote.
+# Print the same info to a file
+with open(os.path.join("analysis", "analysis.txt"), 'w') as outfile:
+    outfile.write(output)
