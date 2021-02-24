@@ -1,4 +1,4 @@
-#!/usr/bin/python
+#!/usr/bin/python3
 
 import os
 import csv
@@ -6,7 +6,8 @@ import csv
 result = {}
 
 # Parse the source data file
-with open(os.path.join("Resources", "election_data.csv")) as csvfile:
+# use dirname for Windows users as gitbash messes up their path. Ugh
+with open(os.path.join(os.path.dirname("__name__"), "Resources", "election_data.csv")) as csvfile:
     reader = csv.reader(csvfile, delimiter=',')
 
     # Skip the header
@@ -59,5 +60,5 @@ output += ( f"{line_sep}\n" +
 print(output)
 
 # Print the same info to a file
-with open(os.path.join("analysis", "analysis.txt"), 'w') as outfile:
+with open(os.path.join(os.path.dirname("__name__"), "analysis", "analysis.txt"), 'w') as outfile:
     outfile.write(output)

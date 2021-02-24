@@ -5,7 +5,8 @@ import csv
 
 
 # Open the source data file.
-with open(os.path.join("Resources", "budget_data.csv")) as csvfile:
+# use dirname for Windows users as gitbash messes up their path
+with open(os.path.join(os.path.dirname("__name__"), "Resources", "budget_data.csv")) as csvfile:
     reader = csv.reader(csvfile, delimiter=',')
 
     # Use the vars as constants
@@ -69,5 +70,5 @@ with open(os.path.join("Resources", "budget_data.csv")) as csvfile:
     print(output)
 
     # Print the same info to a file
-    with open(os.path.join("analysis", "analysis.txt"), 'w') as outfile:
+    with open(os.path.join(os.path.dirname("__name__"), "analysis", "analysis.txt"), 'w') as outfile:
         outfile.write(output)
