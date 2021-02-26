@@ -70,5 +70,5 @@ with open(os.path.join(os.path.dirname("__name__"), "Resources", "budget_data.cs
     print(output)
 
     # Print the same info to a file
-    with open(os.path.join(os.path.dirname("__name__"), "analysis", "analysis.txt"), 'w') as outfile:
+    with open(os.path.join(os.path.dirname("__name__"), "analysis", "JCha_results.txt"), 'w') as outfile:
         outfile.write(output)
